@@ -2,7 +2,7 @@
 import re, random, torch
 from copy import deepcopy
 
-class VauleModelPlayer:
+class ValueModelPlayer:
     def __init__(self, model, device):
         self.model = model
         self.device = device
