@@ -2,12 +2,12 @@
 from copy import copy
 from progress.bar import Bar
 
-from model import Model
+from model import ValueModel
 from game import Game
 from player import *
 
 def make_model_player(params=None):
-    model = Model()
+    model = ValueModel()
 
     if torch.cuda.is_available():
         device = torch.device('cuda')
@@ -21,7 +21,7 @@ def make_model_player(params=None):
         if params:
             model.load_state_dict(torch.load(params, map_location='cpu'))
 
-    return ModelPlayer(model, device)
+    return ValueModelPlayer(model, device)
 
 def ask(question):
     hint = ''

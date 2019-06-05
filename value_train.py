@@ -4,7 +4,7 @@ import os, random, time, torch
 from progress.bar import Bar
 
 from game import Game
-from model import Model
+from model import ValueModel
 from player import *
 from evaluate import evaluate
 
@@ -85,14 +85,14 @@ def main(learn_rate, alpha, epsilon, seed=None):
     # build model, loss function, optimizer, scheduler
     print('\nBuilding model...')
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-    model = Model().to(device)
+    model = ValueModel().to(device)
     if torch.cuda.device_count() >= 1: model = torch.nn.DataParallel(model)
     lossfn = torch.nn.MSELoss()
     optimr = torch.optim.Adam(model.parameters(), lr=learn_rate)
     print(model, 'on', device, 'using', optimr)
 
     # make players
-    model_player = ModelPlayer(model, device)
+    model_player = ValueModelPlayer(model, device)
     random_player = RandomPlayer()
 
     # keep track of the best model

@@ -2,7 +2,7 @@
 import torch
 from torch import nn
 
-class Model(nn.Module):
+class ValueModel(nn.Module):
     def __init__(self, in_channels=1, out_channels=1, width=32):
         super().__init__()
         self.conv_a = nn.Conv2d(in_channels, width, 3, 3)
